@@ -10,10 +10,10 @@ router.get('/get', function(req, res) {
     // console.log ( makePFQueryString(req.query)); 
     const petfinderapistr = makePFQueryString(req.query);
     request(petfinderapistr, function(error, response, body) { 
-        
+        console.log("Petfinder Response", response)
         if (!error && response.statusCode === 200) {
            
-            // console.log(JSON.parse(body).petfinder.pets);
+            // console.log("pets", JSON.parse(body).petfinder.pets);
             // console.log("petfinder data: " + JSON.parse(body).petfinder.pets.pet[0].age.$t);
             // console.log("petfinder data: " + JSON.parse(body).petfinder.pets.pet[0].size.$t); 
 
@@ -25,7 +25,7 @@ router.get('/get', function(req, res) {
 });
 
 const makePFQueryString = function(formObj) { 
-    console.log(formObj);
+    //console.log(formObj);
     // console.log(animaltype); 
     // console.log(breed);
     
@@ -43,7 +43,7 @@ const makePFQueryString = function(formObj) {
         } else {
             return sex;
         } 
-    }
+    };
     
     let adjustSize = function () {
         let size = ''
@@ -72,13 +72,15 @@ const makePFQueryString = function(formObj) {
                 return size;
             }
         } else {
-            console.log(`uh oh, a breed wasn't selected`);
+            console.log(`breed size wasn't selected`);
         }
 
-    } 
+    }; 
 
-    const crossoriginme = 'https://crossorigin.me/';
+    // const crossoriginme = 'https://crossorigin.me/';
     // example query string; http://api.petfinder.com/pet.find?key=e5b1a397d213021b27e64c70bbd8ee34&animal=dog&breed=Chihuahua&size=S&sex=&age=young&location=60657&output=full&format=json
+    // http://api.petfinder.com/pet.find?key=ebd74e2d8f6ad31bd120e6125359c933&animal=dog&breed=Chihuahua&size=S&sex=&age=young&location=60657&output=full&format=json
+    
     let petfinderBaseUrl = `http://api.petfinder.com/pet.find?key=e5b1a397d213021b27e64c70bbd8ee34&animal=${formObj.animaltype}&breed=` 
     + formObj.breed 
     + adjustSex() 
@@ -86,9 +88,9 @@ const makePFQueryString = function(formObj) {
     + adjustSize()
     + "&location=" + formObj.zip 
     + "&output=full&format=json";   
-    console.log(petfinderBaseUrl);
+    //console.log(petfinderBaseUrl);
     return petfinderBaseUrl; 
-} 
+}; 
 
 
 
