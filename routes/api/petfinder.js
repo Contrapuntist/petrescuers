@@ -48,7 +48,7 @@ const makePFQueryString = function(formObj) {
     let adjustSize = function () {
         let size = ''
         if (formObj.animaltype === 'dog') { 
-            if (formObj.size === "small") { 
+            if (formObj.size === "small") { x
                 size = "&size=S";
                 return size;
             } else if (formObj.size === "medium") { 
